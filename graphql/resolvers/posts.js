@@ -1,4 +1,4 @@
-const { AuthenticationError } = require("apollo-server");
+const { AuthenticationError, UserInputError } = require("apollo-server");
 const Post = require("../../models/Post");
 
 const checkAuth = require("../../util/checkAuth");
@@ -27,6 +27,10 @@ const getPost = async (_, { postId }) => {
 
 const createPost = async (_, { body }, context) => {
   const user = checkAuth(context);
+
+  if (body.trim() === "") {
+    throw new UserInputError("Post body must not be empty");
+  }
 
   const newPost = new Post({
     body,
