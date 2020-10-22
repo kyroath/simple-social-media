@@ -3,7 +3,6 @@ import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from "../context/auth";
-import { useForm } from "../util/hooks";
 
 const MenuBar = () => {
   const { user, logout } = useContext(AuthContext);
