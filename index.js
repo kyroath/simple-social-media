@@ -1,16 +1,20 @@
 const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
 
-const { MONGODB } = require("./config");
-
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
 
 const PORT = process.env.PORT || 5000;
+const MONGODB = process.env.MONGODB || "";
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  csrfPrevention: true,
+  cors: {
+    origin: "https://simple-social-kyroath.netlify.app",
+    credentials: true,
+  },
   context: ({ req }) => ({ req }),
 });
 
